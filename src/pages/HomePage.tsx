@@ -1,18 +1,11 @@
-import { useState } from "react";
-
-interface GradientOptions {
-  colors: string[];
-  angle: number;
-  style: "linear" | "radial";
-}
+import { useEffect } from "react";
+import ColorBox from "../components/gradient/ColorBox";
+import { useGradient } from "../context/GradientContext";
 
 const HomePage = () => {
+  const { gradientOptions, setGradientOptions } = useGradient();
+
   const arrowArray = [45, 90, 135, 180, 225, 270, 315, 360];
-  const [gradientOptions, setGradientOptions] = useState<GradientOptions>({
-    colors: ["#9aaf19", "#87afa7"],
-    angle: 45,
-    style: "linear",
-  });
 
   const handleDirectionChange = (
     event: React.MouseEvent<HTMLImageElement, MouseEvent>
@@ -25,6 +18,8 @@ const HomePage = () => {
       angle: Number(event.currentTarget.alt),
     });
   };
+
+  useEffect(() => {}, [gradientOptions]);
 
   return (
     <main>
@@ -40,46 +35,29 @@ const HomePage = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <div className="gradient-preview w-full bg-rose-500 h-60"></div>
+            <div
+              className="gradient-preview w-full bg-rose-500 h-60"
+              style={{
+                background: `${gradientOptions.style}-gradient(${
+                  gradientOptions.style === "linear"
+                    ? `${gradientOptions.angle}deg`
+                    : "circle"
+                }, ${gradientOptions.colors[0]},${gradientOptions.colors[1]})`,
+              }}
+            ></div>
             <div className="gradient-controls flex flex-col gap-2">
               {/* color selectors  */}
               <div className="color-codes border-b border-slate-700 w-full p-2">
                 <p className="text-center pb-2">Colors</p>
 
                 <div className="flex justify-between items-center">
-                  <div className="single-color flex gap-2 items-center">
-                    <input
-                      type="color"
-                      id="first-color"
-                      className="color-box w-10 h-10"
-                      value={gradientOptions.colors[0]}
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                        setGradientOptions({
-                          ...gradientOptions,
-                          colors: [e.target.value, gradientOptions.colors[1]],
-                        });
-                      }}
-                    />
-                    <label htmlFor="first-color">
-                      {gradientOptions.colors[0]}
-                    </label>
-                  </div>
+                  <ColorBox id={0} />
 
                   <div className="random-colors">
                     <img src="random.svg" alt="random" width={20} />
                   </div>
 
-                  <div className="single-color flex gap-2 items-center">
-                    <input
-                      type="color"
-                      id="first-color"
-                      className="color-box w-10 h-10"
-                    />
-                    <label htmlFor="first-color">
-                      {gradientOptions.colors[1]}
-                    </label>
-                  </div>
+                  <ColorBox id={1} />
                 </div>
               </div>
 
