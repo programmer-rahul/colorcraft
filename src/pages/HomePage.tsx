@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import ColorBox from "../components/gradient/ColorBox";
 import { useGradient } from "../context/GradientContext";
 import { getHexCode } from "../utils/helper";
@@ -40,7 +39,7 @@ const HomePage = () => {
     setGradientOptions({ ...gradientOptions });
   };
 
-  const copyGradientCss = async () => {
+  const copyGradientCss = () => {
     if (!navigator.clipboard)
       return toast.error("Your browser does't support clipboard copy");
     navigator.clipboard
@@ -49,8 +48,6 @@ const HomePage = () => {
         toast.success("Gradient copied to clipboard");
       });
   };
-
-  useEffect(() => {}, [gradientOptions]);
 
   return (
     <main>
