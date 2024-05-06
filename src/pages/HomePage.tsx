@@ -6,12 +6,11 @@ import { getHexCode } from "../utils/helper";
 const HomePage = () => {
   const { gradientOptions, setGradientOptions } = useGradient();
 
-  const arrowArray = [45, 90, 135, 180, 225, 270, 315, 360];
+  const directionAngles = [45, 90, 135, 180, 225, 270, 315, 360];
 
   const handleDirectionChange = (
     event: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
-    // console.log("evnet", event.currentTarget.alt);
     if (event.currentTarget.alt === String(gradientOptions.angle)) return;
 
     setGradientOptions({
@@ -24,6 +23,14 @@ const HomePage = () => {
     gradientOptions.colors[0] = getHexCode();
     gradientOptions.colors[1] = getHexCode();
 
+    setGradientOptions({ ...gradientOptions });
+  };
+
+  const generateRandomGradient = () => {
+    gradientOptions.angle = directionAngles[Math.floor(Math.random() * 7)];
+    gradientOptions.style = Math.floor(Math.random() * 2) ? "linear" : "radial";
+    gradientOptions.colors[0] = getHexCode();
+    gradientOptions.colors[1] = getHexCode();
     setGradientOptions({ ...gradientOptions });
   };
 
@@ -76,7 +83,7 @@ const HomePage = () => {
               <div className="gradient-direction border-b border-slate-700 w-full p-2">
                 <p className="text-center pb-2">Direction</p>
                 <div className="flex justify-around mk-cursor">
-                  {arrowArray.map((_, index) => {
+                  {directionAngles.map((_, index) => {
                     return (
                       <img
                         src="arrow.svg"
@@ -131,7 +138,10 @@ const HomePage = () => {
               </div>
 
               <div className="flex gap-4 place-content-center py-4">
-                <div className="px-2 py-1 border border-slate-700 flex gap-2 rounded-md cursor-pointer">
+                <div
+                  className="px-2 py-1 border border-slate-700 flex gap-2 rounded-md cursor-pointer"
+                  onClick={generateRandomGradient}
+                >
                   <img src="random.svg" alt="random" width={20} />
                   <p>Random</p>
                 </div>
