@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import ColorBox from "../components/gradient/ColorBox";
 import { useGradient } from "../context/GradientContext";
+import { getHexCode } from "../utils/helper";
 
 const HomePage = () => {
   const { gradientOptions, setGradientOptions } = useGradient();
@@ -17,6 +18,13 @@ const HomePage = () => {
       ...gradientOptions,
       angle: Number(event.currentTarget.alt),
     });
+  };
+
+  const generateRandomColors = () => {
+    gradientOptions.colors[0] = getHexCode();
+    gradientOptions.colors[1] = getHexCode();
+
+    setGradientOptions({ ...gradientOptions });
   };
 
   useEffect(() => {}, [gradientOptions]);
@@ -53,7 +61,10 @@ const HomePage = () => {
                 <div className="flex justify-between items-center">
                   <ColorBox id={0} />
 
-                  <div className="random-colors">
+                  <div
+                    className="random-colors cursor-pointer"
+                    onClick={generateRandomColors}
+                  >
                     <img src="random.svg" alt="random" width={20} />
                   </div>
 
