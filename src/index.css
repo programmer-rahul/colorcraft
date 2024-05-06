@@ -9,3 +9,24 @@ body {
   box-sizing: border-box;
   font-family: "Input Mono";
 }
+
+.mk-cursor img {
+  cursor: pointer;
+}
+
+.color-box {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.color-box::-webkit-color-swatch {
+  border-radius: 4px;
+  border: none;
+}
+.color-box::-moz-color-swatch {
+  border-radius: 4px;
+  border: none;
+}
