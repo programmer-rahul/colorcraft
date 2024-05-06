@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+import { getHexCode } from "../utils/helper";
 
 interface GradientOptions {
   colors: string[];
@@ -21,7 +22,7 @@ export const GradientContext = createContext<ContextTypes>({
 
 export const GradientProvider = ({ children }: { children: ReactNode }) => {
   const [gradientOptions, setGradientOptions] = useState<GradientOptions>({
-    colors: ["#9aaf19", "#87afa7"],
+    colors: [getHexCode(), getHexCode()],
     angle: 45,
     style: "linear",
   });

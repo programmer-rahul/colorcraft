@@ -2,11 +2,17 @@ import { useEffect } from "react";
 import ColorBox from "../components/gradient/ColorBox";
 import { useGradient } from "../context/GradientContext";
 import { getHexCode } from "../utils/helper";
+import toast from "react-hot-toast";
 
 const HomePage = () => {
   const { gradientOptions, setGradientOptions } = useGradient();
 
   const directionAngles = [45, 90, 135, 180, 225, 270, 315, 360];
+  const currentGradient = `${gradientOptions.style}-gradient(${
+    gradientOptions.style === "linear"
+      ? `${gradientOptions.angle}deg`
+      : "circle"
+  }, ${gradientOptions.colors[0]},${gradientOptions.colors[1]})`;
 
   const handleDirectionChange = (
     event: React.MouseEvent<HTMLImageElement, MouseEvent>
@@ -34,6 +40,16 @@ const HomePage = () => {
     setGradientOptions({ ...gradientOptions });
   };
 
+  const copyGradientCss = async () => {
+    if (!navigator.clipboard)
+      return toast.error("Your browser does't support clipboard copy");
+    navigator.clipboard
+      .writeText("background : " + currentGradient)
+      .then(() => {
+        toast.success("Gradient copied to clipboard");
+      });
+  };
+
   useEffect(() => {}, [gradientOptions]);
 
   return (
@@ -53,11 +69,7 @@ const HomePage = () => {
             <div
               className="gradient-preview w-full bg-rose-500 h-60"
               style={{
-                background: `${gradientOptions.style}-gradient(${
-                  gradientOptions.style === "linear"
-                    ? `${gradientOptions.angle}deg`
-                    : "circle"
-                }, ${gradientOptions.colors[0]},${gradientOptions.colors[1]})`,
+                background: currentGradient,
               }}
             ></div>
             <div className="gradient-controls flex flex-col gap-2">
@@ -145,7 +157,10 @@ const HomePage = () => {
                   <img src="random.svg" alt="random" width={20} />
                   <p>Random</p>
                 </div>
-                <div className="px-2 py-1 border border-slate-700 flex gap-2 rounded-md cursor-pointer">
+                <div
+                  className="px-2 py-1 border border-slate-700 flex gap-2 rounded-md cursor-pointer"
+                  onClick={copyGradientCss}
+                >
                   <img src="copy.svg" alt="copy" width={25} />
                   <p>Copy</p>
                 </div>
