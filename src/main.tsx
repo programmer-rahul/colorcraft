@@ -8,7 +8,7 @@ import { Toaster } from "react-hot-toast";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <GradientProvider>
-      <Toaster position="top-right"/>
+      <Toaster position="top-right" />
       <App />
     </GradientProvider>
   </React.StrictMode>
