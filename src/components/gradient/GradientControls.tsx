@@ -72,11 +72,11 @@ const GradientControls = () => {
       </div>
 
       {/* direction options  */}
-      <div className="gradient-direction border-b border-slate-700 w-full p-2 lg:w-96 xl:w-64 ">
+      <div className="gradient-direction border-b border-slate-700 w-full p-2 lg:w-96 xl:w-64">
         <p className="text-center pb-2 xl:text-start xl:font-semibold">
           Direction
         </p>
-        <div className="flex justify-around mk-cursor xl:flex-wrap gap-x-7">
+        <div className="flex justify-around mk-cursor xl:flex-wrap xl:gap-x-7">
           {directionAngles.map((_, index) => {
             return (
               <img
