@@ -6,9 +6,18 @@ interface GradientOptions {
   angle: number;
   style: "linear" | "radial";
 }
+interface DownloadImageDimentions {
+  width: number;
+  height: number;
+}
 type ContextTypes = {
   gradientOptions: GradientOptions;
   setGradientOptions: React.Dispatch<React.SetStateAction<GradientOptions>>;
+
+  downloadImageDimentions: DownloadImageDimentions;
+  setDownloadImageDimentions: React.Dispatch<
+    React.SetStateAction<DownloadImageDimentions>
+  >;
 };
 
 export const GradientContext = createContext<ContextTypes>({
@@ -18,6 +27,9 @@ export const GradientContext = createContext<ContextTypes>({
     style: "linear",
   },
   setGradientOptions: () => {},
+
+  downloadImageDimentions: { width: 1980, height: 1080 },
+  setDownloadImageDimentions: () => {},
 });
 
 export const GradientProvider = ({ children }: { children: ReactNode }) => {
@@ -26,8 +38,22 @@ export const GradientProvider = ({ children }: { children: ReactNode }) => {
     angle: 45,
     style: "linear",
   });
+
+  const [downloadImageDimentions, setDownloadImageDimentions] =
+    useState<DownloadImageDimentions>({
+      width: 1980,
+      height: 1080,
+    });
+
   return (
-    <GradientContext.Provider value={{ gradientOptions, setGradientOptions }}>
+    <GradientContext.Provider
+      value={{
+        gradientOptions,
+        setGradientOptions,
+        downloadImageDimentions,
+        setDownloadImageDimentions,
+      }}
+    >
       {children}
     </GradientContext.Provider>
   );
