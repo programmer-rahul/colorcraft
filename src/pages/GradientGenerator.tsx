@@ -5,7 +5,7 @@ import Header from "../components/gradient/Header";
 const HomePage = () => {
   return (
     <main>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-slate-200 dark:bg-slate-900">
         <Header />
 
         <div className="flex-1 main p-2 xl:flex xl:flex-col">

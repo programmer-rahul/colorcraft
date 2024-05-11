@@ -1,4 +1,5 @@
 import { useGradient } from "../../../context/GradientContext";
+import ImageBtn from "../../reusable/ImageBtn";
 
 const ExportGradient = () => {
   const {
@@ -46,7 +47,7 @@ const ExportGradient = () => {
     link.click();
   };
   return (
-    <div className="p-2 w-full flex flex-col border-b border-slate-700 lg:w-96 xl:w-64">
+    <div className="p-2 w-full flex flex-col border-b border-slate-700 lg:w-96 xl:w-64 bg-gray-700">
       <p className="text-center pb-2 xl:text-start xl:font-semibold">
         Download Image
       </p>
@@ -56,7 +57,7 @@ const ExportGradient = () => {
           <span>Width :</span>
           <input
             type="number"
-            className="p-1 border outline-none border-slate-700 rounded-sm w-2/5 h-6"
+            className="p-1 border outline-none border-slate-700 rounded-md w-2/5 h-6"
             value={downloadImageDimentions.width}
             onChange={(event) => {
               setDownloadImageDimentions((prev) => {
@@ -70,7 +71,7 @@ const ExportGradient = () => {
           <span>Height :</span>
           <input
             type="number"
-            className="p-1 border outline-none border-slate-700 rounded-sm w-2/5 h-6"
+            className="p-1 border outline-none border-slate-700 rounded-md w-2/5 h-6"
             value={downloadImageDimentions.height}
             onChange={(event) => {
               setDownloadImageDimentions((prev) => {
@@ -82,13 +83,13 @@ const ExportGradient = () => {
         </div>
       </div>
 
-      <div
-        className="px-2 py-1 border border-slate-700 justify-center flex gap-2 rounded-md cursor-pointer items-center w-1/2 self-end mt-4"
-        onClick={exportGradientHandler}
-      >
-        <img src="export.svg" alt="export" width={20} />
-        <p>Export</p>
-      </div>
+      <ImageBtn
+        type="secondary"
+        text="export"
+        clickHandler={exportGradientHandler}
+        imgSrc="export.svg"
+        style={"w-1/2 self-end mt-4 flex justify-center"}
+      />
     </div>
   );
 };

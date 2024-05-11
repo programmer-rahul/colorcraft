@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { useGradient } from "../../../context/GradientContext";
 import { DIRECTION_ANGLES } from "../../../utils/constants";
 import { getHexCode } from "../../../utils/helper";
+import ImageBtn from "../../reusable/ImageBtn";
 
 const CopyCssControl = () => {
   const { gradientOptions, setGradientOptions } = useGradient();
@@ -31,21 +32,20 @@ const CopyCssControl = () => {
   };
 
   return (
-    <div className="flex gap-4 place-content-center py-4 lg:w-96 xl:w-64 xl:absolute xl:bottom-0">
-      <div
-        className="px-2 py-1 border border-slate-700 flex gap-2 rounded-md cursor-pointer items-center"
-        onClick={generateRandomGradient}
-      >
-        <img src="random.svg" alt="random" width={20} />
-        <p>Random</p>
-      </div>
-      <div
-        className="px-2 py-1 border border-slate-700 flex gap-2 rounded-md cursor-pointer items-center"
-        onClick={copyGradientCss}
-      >
-        <img src="copy.svg" alt="copy" width={25} />
-        <p>Copy</p>
-      </div>
+    <div className="flex gap-4 place-content-center py-4 lg:w-96 xl:w-64 xl:absolute xl:bottom-0 bg-gray-700">
+      <ImageBtn
+        type="primary"
+        text="random"
+        clickHandler={generateRandomGradient}
+        imgSrc="random.svg"
+      />
+      <ImageBtn
+        type="secondary"
+        text="copy"
+        clickHandler={copyGradientCss}
+        imgSrc="copy.svg"
+        style="pr-3"
+      />
     </div>
   );
 };

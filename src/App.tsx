@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import GradientGenerator from "./pages/GradientGenerator";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<GradientGenerator />} />
       </Routes>
     </BrowserRouter>
   );
