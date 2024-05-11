@@ -57,7 +57,7 @@ const ExportGradient = () => {
           <span>Width :</span>
           <input
             type="number"
-            className="p-1 border outline-none border-slate-700 rounded-md w-2/5 h-6"
+            className="p-1 text-slate-900 outline-none rounded-md w-2/5 h-6"
             value={downloadImageDimentions.width}
             onChange={(event) => {
               setDownloadImageDimentions((prev) => {
@@ -71,7 +71,7 @@ const ExportGradient = () => {
           <span>Height :</span>
           <input
             type="number"
-            className="p-1 border outline-none border-slate-700 rounded-md w-2/5 h-6"
+            className="p-1 text-slate-900 outline-none rounded-md w-2/5 h-6"
             value={downloadImageDimentions.height}
             onChange={(event) => {
               setDownloadImageDimentions((prev) => {

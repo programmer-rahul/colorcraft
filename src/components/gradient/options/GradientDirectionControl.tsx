@@ -5,13 +5,13 @@ const GradientDirectionControl = () => {
   const { gradientOptions, setGradientOptions } = useGradient();
 
   const handleDirectionChange = (
-    event: React.MouseEvent<HTMLImageElement, MouseEvent>
+    event: React.MouseEvent<SVGSVGElement, MouseEvent>
   ) => {
-    if (event.currentTarget.alt === String(gradientOptions.angle)) return;
+    if (event.currentTarget.ariaLabel === String(gradientOptions.angle)) return;
 
     setGradientOptions({
       ...gradientOptions,
-      angle: Number(event.currentTarget.alt),
+      angle: Number(event.currentTarget.ariaLabel),
     });
   };
 
@@ -21,23 +21,18 @@ const GradientDirectionControl = () => {
         Direction
       </p>
       <div className="flex justify-around mk-cursor xl:flex-wrap xl:gap-x-7">
-        {DIRECTION_ANGLES.map((_, index) => {
+        {DIRECTION_ANGLES.map((_) => {
           return (
-            // <img
-            //   src="arrow.svg"
-            //   alt={String(_)}
-            //   width={30}
-            //   key={index}
-            //   style={{ rotate: `${_}deg` }}
-            //   className={`${
-            //     gradientOptions.angle === _ &&
-            //     "border-2 rounded-full border-slate-700"
-            //   }`}
-            //   onClick={handleDirectionChange}
-            // />
-
-            <svg width={40} viewBox="0 0 24 24"
-            
+            <svg
+              width={30}
+              onClick={handleDirectionChange}
+              viewBox="0 0 24 24"
+              aria-label={String(_)}
+              style={{ rotate: `${_}deg` }}
+              className={`${
+                gradientOptions.angle === _ &&
+                "border-2 rounded-full border-sky-600"
+              }`}
             >
               <path
                 d="M12 6V18M12 18L7 13M12 18L17 13"
