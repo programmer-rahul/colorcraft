@@ -10,7 +10,9 @@ const HomePage = () => {
 
         <div className="flex-1 main p-2 xl:flex xl:flex-col">
           <div className="text-xl xl:text-4xl text-center py-2 font-semibold">
-            <p>Generate Css Gradient</p>
+            <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+              Generate Css Gradient
+            </p>
           </div>
 
           <div className="flex flex-col gap-2 xl:flex-1 xl:flex-row">

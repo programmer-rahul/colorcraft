@@ -1,4 +1,4 @@
-import { useGradient } from "../../context/GradientContext";
+import { useGradient } from "../../../context/GradientContext";
 
 const ColorBox = ({ id }: { id: number }) => {
   const { gradientOptions, setGradientOptions } = useGradient();

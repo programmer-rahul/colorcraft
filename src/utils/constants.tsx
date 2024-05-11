@@ -1,0 +1,1 @@
+export const DIRECTION_ANGLES = [45, 90, 135, 180, 225, 270, 315, 360];
