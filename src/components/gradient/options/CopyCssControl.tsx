@@ -32,7 +32,7 @@ const CopyCssControl = () => {
   };
 
   return (
-    <div className="flex gap-4 place-content-center py-4 lg:w-96 xl:w-64 xl:absolute xl:bottom-0 bg-gray-700">
+    <div className="flex place-content-center gap-4 bg-gray-700 py-4 dark:border-b-2 dark:border-slate-200 lg:w-96 xl:absolute xl:bottom-0 xl:w-64">
       <ImageBtn
         type="primary"
         text="random"

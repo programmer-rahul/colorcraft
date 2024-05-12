@@ -4,7 +4,7 @@ const GradientStyleControl = () => {
   const { gradientOptions, setGradientOptions } = useGradient();
 
   return (
-    <div className="gradient-style p-2 w-full border-b lg:w-96 xl:w-64 bg-gray-700">
+    <div className="gradient-style p-2 w-full border-b-2 lg:w-96 xl:w-64 bg-gray-700">
       <p className="text-center pb-2 xl:text-start xl:font-semibold">Style</p>
       <div className="flex gap-4 place-content-center">
         <button

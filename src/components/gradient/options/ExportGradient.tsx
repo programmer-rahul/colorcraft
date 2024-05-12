@@ -47,17 +47,17 @@ const ExportGradient = () => {
     link.click();
   };
   return (
-    <div className="p-2 w-full flex flex-col border-b border-slate-700 lg:w-96 xl:w-64 bg-gray-700">
-      <p className="text-center pb-2 xl:text-start xl:font-semibold">
+    <div className="flex w-full flex-col border-b-2 bg-gray-700 p-2 dark:border-slate-200 lg:w-96 xl:w-64">
+      <p className="pb-2 text-center xl:text-start xl:font-semibold">
         Download Image
       </p>
 
-      <div className="flex gap-2 w-full flex-col">
-        <div className="width flex gap-1 w-full items-start">
+      <div className="flex w-full flex-col gap-2">
+        <div className="width flex w-full items-start gap-1">
           <span>Width :</span>
           <input
             type="number"
-            className="p-1 text-slate-900 outline-none rounded-md w-2/5 h-6"
+            className="h-6 w-2/5 rounded-md p-1 text-slate-900 outline-none"
             value={downloadImageDimentions.width}
             onChange={(event) => {
               setDownloadImageDimentions((prev) => {
@@ -67,11 +67,11 @@ const ExportGradient = () => {
           />
           <span>px</span>
         </div>
-        <div className="height flex gap-1 w-full items-start">
+        <div className="height flex w-full items-start gap-1">
           <span>Height :</span>
           <input
             type="number"
-            className="p-1 text-slate-900 outline-none rounded-md w-2/5 h-6"
+            className="h-6 w-2/5 rounded-md p-1 text-slate-900 outline-none"
             value={downloadImageDimentions.height}
             onChange={(event) => {
               setDownloadImageDimentions((prev) => {

@@ -11,7 +11,7 @@ const GredientPreview = () => {
 
   return (
     <div
-      className="gradient-preview h-60 w-full rounded-md xl:m-3 xl:h-auto"
+      className="gradient-preview dark:-10 h-60 w-full rounded-md dark:border-4 dark:border-slate-200 xl:m-3 xl:h-auto"
       style={{
         background: currentGradient,
       }}

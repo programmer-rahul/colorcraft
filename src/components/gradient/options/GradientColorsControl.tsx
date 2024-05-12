@@ -13,7 +13,7 @@ const GradientColorsControl = () => {
   };
 
   return (
-    <div className="color-codes border-b border-slate-700 w-full p-2 lg:w-96 xl:w-64 bg-gray-700">
+    <div className="color-codes border-b-2 dark:border-slate-200 w-full p-2 lg:w-96 xl:w-64 bg-gray-700">
       <p className="text-center pb-2 xl:text-start xl:font-semibold">Colors</p>
 
       <div className="flex justify-between items-center xl:flex-col xl:items-start">

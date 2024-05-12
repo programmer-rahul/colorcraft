@@ -5,7 +5,7 @@ const GradientDirectionControl = () => {
   const { gradientOptions, setGradientOptions } = useGradient();
 
   const handleDirectionChange = (
-    event: React.MouseEvent<SVGSVGElement, MouseEvent>
+    event: React.MouseEvent<SVGSVGElement, MouseEvent>,
   ) => {
     if (event.currentTarget.ariaLabel === String(gradientOptions.angle)) return;
 
@@ -16,11 +16,11 @@ const GradientDirectionControl = () => {
   };
 
   return (
-    <div className="gradient-direction border-b border-slate-700 w-full p-2 lg:w-96 xl:w-64 bg-gray-700">
-      <p className="text-center pb-2 xl:text-start xl:font-semibold">
+    <div className="gradient-direction w-full border-b-2 bg-gray-700 p-2 dark:border-slate-200 lg:w-96 xl:w-64">
+      <p className="pb-2 text-center xl:text-start xl:font-semibold">
         Direction
       </p>
-      <div className="flex justify-around mk-cursor xl:flex-wrap xl:gap-x-7">
+      <div className="mk-cursor flex justify-around xl:flex-wrap xl:gap-x-7">
         {DIRECTION_ANGLES.map((_, index) => {
           return (
             <svg
@@ -32,7 +32,7 @@ const GradientDirectionControl = () => {
               style={{ rotate: `${_}deg` }}
               className={`${
                 gradientOptions.angle === _ &&
-                "border-2 rounded-full border-sky-600"
+                "rounded-full border-2 border-sky-600"
               }`}
             >
               <path
