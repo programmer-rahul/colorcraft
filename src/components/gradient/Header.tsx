@@ -1,12 +1,22 @@
-import { useTheme } from "../../context/ThemeContext";
+import { ThemesType, useTheme } from "../../context/ThemeContext";
 import { LocalStorage } from "../../utils/helper";
 
 const Header = () => {
   const { currentTheme, setCurrentTheme } = useTheme();
 
   const handleThemeChange = () => {
-    setCurrentTheme(currentTheme === "dark" ? "light" : "dark");
-    LocalStorage.set("theme", currentTheme === "dark" ? "light" : "dark");
+    const theme: ThemesType = currentTheme === "dark" ? "light" : "dark";
+
+    // set theme
+    setCurrentTheme(theme);
+    LocalStorage.set("theme", theme);
+
+    if (theme === "light") {
+      document.body.classList.add("dark");
+    }
+    if (theme === "dark") {
+      document.body.classList.remove("dark");
+    }
   };
 
   return (

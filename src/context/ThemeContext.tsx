@@ -9,9 +9,11 @@ import {
 } from "react";
 import { LocalStorage } from "../utils/helper";
 
+export type ThemesType = "dark" | "light";
+
 type ContextTypes = {
-  currentTheme: "dark" | "light";
-  setCurrentTheme: Dispatch<SetStateAction<"dark" | "light">>;
+  currentTheme: ThemesType;
+  setCurrentTheme: Dispatch<SetStateAction<ThemesType>>;
 };
 
 export const ThemeContext = createContext<ContextTypes>({
@@ -20,14 +22,15 @@ export const ThemeContext = createContext<ContextTypes>({
 });
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [currentTheme, setCurrentTheme] = useState<"dark" | "light">(() => {
+  const [currentTheme, setCurrentTheme] = useState<ThemesType>(() => {
     const theme = LocalStorage.get("theme");
     return theme ? theme : "light";
   });
 
   useEffect(() => {
-    // console.log("theme changed");
-    
+    currentTheme === "dark"
+      ? document.body.classList.add("dark")
+      : document.body.classList.remove("dark");
   }, [currentTheme]);
 
   return (
