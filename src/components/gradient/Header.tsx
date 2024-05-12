@@ -33,7 +33,8 @@ const Header = () => {
           <img
             src={currentTheme === "dark" ? "theme/dark.svg" : "theme/light.svg"}
             alt="theme"
-            width={40}
+            // width={30}
+            className="w-8 md:w-10 "
           />
         </div>
       </div>
