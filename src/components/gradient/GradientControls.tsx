@@ -6,7 +6,7 @@ import GradientColorsControl from "./options/GradientColorsControl";
 
 const GradientControls = () => {
   return (
-    <div className="gradient-controls flex flex-col gap-2 lg:flex-row lg:flex-wrap lg:justify-around lg:gap-12 xl:flex-nowrap xl:flex-col xl:gap-2 xl:justify-start xl:py-1 xl:relative text-white">
+    <div className="gradient-controls flex flex-col gap-2 text-white lg:flex-row lg:flex-wrap lg:justify-around lg:gap-12 xl:relative xl:mb-4 xl:mt-2 xl:flex-col xl:flex-nowrap xl:justify-start xl:gap-2 xl:py-1">
       {/* color selectors  */}
       <GradientColorsControl />
 

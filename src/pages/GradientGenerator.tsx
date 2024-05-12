@@ -5,12 +5,12 @@ import Header from "../components/gradient/Header";
 const HomePage = () => {
   return (
     <main>
-      <div className="flex flex-col min-h-screen bg-slate-200 dark:bg-slate-900">
+      <div className="flex min-h-screen flex-col bg-slate-200 dark:bg-slate-900">
         <Header />
 
-        <div className="flex-1 main p-2 xl:flex xl:flex-col">
-          <div className="text-xl xl:text-4xl text-center py-2 font-semibold">
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+        <div className="main flex-1 p-2 xl:flex xl:flex-col">
+          <div className="py-2 text-center text-xl font-semibold xl:text-4xl">
+            <p className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
               Generate Css Gradient
             </p>
           </div>

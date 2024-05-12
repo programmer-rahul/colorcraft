@@ -21,13 +21,14 @@ const GradientDirectionControl = () => {
         Direction
       </p>
       <div className="flex justify-around mk-cursor xl:flex-wrap xl:gap-x-7">
-        {DIRECTION_ANGLES.map((_) => {
+        {DIRECTION_ANGLES.map((_, index) => {
           return (
             <svg
               width={30}
               onClick={handleDirectionChange}
               viewBox="0 0 24 24"
               aria-label={String(_)}
+              key={index}
               style={{ rotate: `${_}deg` }}
               className={`${
                 gradientOptions.angle === _ &&
@@ -37,9 +38,9 @@ const GradientDirectionControl = () => {
               <path
                 d="M12 6V18M12 18L7 13M12 18L17 13"
                 stroke="rgb(226 232 240)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           );
