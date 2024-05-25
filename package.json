@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "@tippyjs/react": "^4.2.6",
     "axios": "^1.6.7",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
