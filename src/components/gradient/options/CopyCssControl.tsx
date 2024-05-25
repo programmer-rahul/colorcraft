@@ -3,15 +3,15 @@ import { useGradient } from "../../../context/GradientContext";
 import { DIRECTION_ANGLES } from "../../../utils/constants";
 import { getHexCode } from "../../../utils/helper";
 import ImageBtn from "../../reusable/ImageBtn";
+import Tooltip from "../../tippyjs/Tippy";
 
 const CopyCssControl = () => {
   const { gradientOptions, setGradientOptions } = useGradient();
 
-  const currentGradient = `${gradientOptions.style}-gradient(${
-    gradientOptions.style === "linear"
-      ? `${gradientOptions.angle}deg`
-      : "circle"
-  }, ${gradientOptions.colors[0]},${gradientOptions.colors[1]})`;
+  const currentGradient = `${gradientOptions.style}-gradient(${gradientOptions.style === "linear"
+    ? `${gradientOptions.angle}deg`
+    : "circle"
+    }, ${gradientOptions.colors[0]},${gradientOptions.colors[1]})`;
 
   const generateRandomGradient = () => {
     gradientOptions.angle = DIRECTION_ANGLES[Math.floor(Math.random() * 7)];
@@ -33,12 +33,17 @@ const CopyCssControl = () => {
 
   return (
     <div className="flex place-content-center gap-4 bg-gray-700 py-4 dark:border-b-2 dark:border-slate-200 lg:w-96 xl:absolute xl:bottom-0 xl:w-64">
-      <ImageBtn
-        type="primary"
-        text="random"
-        clickHandler={generateRandomGradient}
-        imgSrc="random.svg"
-      />
+      <Tooltip content="Generate random gradient" >
+        <div>
+          <ImageBtn
+            type="primary"
+            text="random"
+            clickHandler={generateRandomGradient}
+            imgSrc="random.svg"
+          />
+        </div>
+      </Tooltip>
+
       <ImageBtn
         type="secondary"
         text="copy"
