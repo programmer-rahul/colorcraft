@@ -105,10 +105,11 @@ const ExportGradient = () => {
       </div>
       
       <Dropdown
-        title="Image Format"
-        items={["PNG", "JPEG", "SVG"]}
+        title="Select Format"
+        items={["PNG", "JPEG", "BMP", "ICO", "TIFF", "JFIF"]}
         clickHandler={(item) => setImageFormat(item)}
         style="w-full mt-4"
+        updateWithSelectedItem={true}
       />
 
       <ImageBtn
