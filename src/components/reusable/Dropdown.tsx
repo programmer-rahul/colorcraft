@@ -5,17 +5,27 @@ interface DropdownProps {
     items: string[];
     clickHandler: (item: string) => void;
     style?: string;
+    selectedItem?: string;
+    updateWithSelectedItem?: boolean;
 }
 
-const Dropdown = ({ title, items, clickHandler, style }: DropdownProps) => {
+const Dropdown = ({ title, items, clickHandler, style, updateWithSelectedItem }: DropdownProps) => {
     const [isOpen, setIsOpen] = useState(false);
+    const handleItemClick = (item: string) => {
+        clickHandler(item);
+        setIsOpen(false);
+        if (updateWithSelectedItem) {
+            setTitle(item);
+        }
+    };
+    const [currentTitle, setTitle] = useState(title);
     return (
         <div className={`relative ${style}`}>
             <div
                 className="flex items-center justify-between px-2 py-1 border font-semibold rounded-md cursor-pointer z-10"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                <p>{title}</p>
+                <p>{currentTitle}</p>
                 <span className="text-2xl">▼</span>
             </div>
             {isOpen && (
@@ -24,10 +34,7 @@ const Dropdown = ({ title, items, clickHandler, style }: DropdownProps) => {
                         <div
                             key={index}
                             className="px-2 py-1 cursor-pointer hover:bg-gray-200 text-black"
-                            onClick={() => {
-                                clickHandler(item);
-                                setIsOpen(false);
-                            }}
+                            onClick={() => handleItemClick(item)}
                         >
                             {item}
                         </div>
