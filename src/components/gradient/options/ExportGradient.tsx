@@ -1,5 +1,7 @@
 import { useGradient } from "../../../context/GradientContext";
 import ImageBtn from "../../reusable/ImageBtn";
+import Dropdown from "../../reusable/Dropdown";
+import { useState } from "react";
 
 const ExportGradient = () => {
   const {
@@ -7,6 +9,8 @@ const ExportGradient = () => {
     setDownloadImageDimentions,
     gradientOptions,
   } = useGradient();
+
+  const [imageFormat, setImageFormat] = useState("PNG");
 
   const exportGradientHandler = () => {
     const canvas = document.createElement("canvas");
@@ -27,9 +31,6 @@ const ExportGradient = () => {
     const xWidth = Math.abs(Math.cos(radian)) * canvas.width;
     const xHeight = Math.abs(Math.sin(radian)) * canvas.height;
 
-    console.log("xwidth", xWidth, xHeight);
-    console.log("radiant", radian);
-
     const gradient = ctx.createLinearGradient(0, 0, xWidth, xHeight);
 
     gradient.addColorStop(0, newGredient.colors[0]);
@@ -39,13 +40,33 @@ const ExportGradient = () => {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // create downloadable image of gradient
-    const image = canvas.toDataURL("image/png");
+    let image;
+    let extension;
+
+    switch (imageFormat) {
+      case "JPEG":
+        image = canvas.toDataURL("image/jpeg");
+        extension = "jpeg";
+        break;
+      case "SVG":
+        // SVG export requires a different approach. Here, we'll just handle PNG and JPEG for simplicity.
+        alert("SVG format not supported in canvas export.");
+        return;
+      case "PNG":
+      default:
+        image = canvas.toDataURL("image/png");
+        extension = "png";
+        break;
+    }
+
     const link = document.createElement("a");
     link.href = image;
-    link.download = "colorcraft-gradient.png";
+    link.download = `colorcraft-gradient.${extension}`;
     document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
+
   return (
     <div className="flex w-full flex-col border-b-2 bg-gray-700 p-2 dark:border-slate-200 lg:w-96 xl:w-64">
       <p className="pb-2 text-center xl:text-start xl:font-semibold">
@@ -82,14 +103,22 @@ const ExportGradient = () => {
           <span>px</span>
         </div>
       </div>
+      
+      <Dropdown
+        title="Image Format"
+        items={["PNG", "JPEG", "SVG"]}
+        clickHandler={(item) => setImageFormat(item)}
+        style="w-full mt-4"
+      />
 
       <ImageBtn
         type="secondary"
         text="export"
         clickHandler={exportGradientHandler}
         imgSrc="export.svg"
-        style={"w-1/2 self-end mt-4 flex justify-center"}
+        style={"w-full self-end mt-4 flex justify-center"}
       />
+
     </div>
   );
 };
