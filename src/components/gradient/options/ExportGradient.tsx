@@ -21,25 +21,24 @@ const ExportGradient = () => {
     canvas.width = downloadImageDimentions.width;
     canvas.height = downloadImageDimentions.height;
 
-    const newGredient = {
+    const newGradient = {
       angle: gradientOptions.angle,
       colors: [...gradientOptions.colors],
     };
 
-    const radian = (newGredient.angle * Math.PI) / 360;
+    const radian = (newGradient.angle * Math.PI) / 360;
 
     const xWidth = Math.abs(Math.cos(radian)) * canvas.width;
     const xHeight = Math.abs(Math.sin(radian)) * canvas.height;
 
     const gradient = ctx.createLinearGradient(0, 0, xWidth, xHeight);
 
-    gradient.addColorStop(0, newGredient.colors[0]);
-    gradient.addColorStop(1, newGredient.colors[1]);
+    gradient.addColorStop(0, newGradient.colors[0]);
+    gradient.addColorStop(1, newGradient.colors[1]);
 
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // create downloadable image of gradient
     let image;
     let extension;
 
@@ -48,9 +47,11 @@ const ExportGradient = () => {
         image = canvas.toDataURL("image/jpeg");
         extension = "jpeg";
         break;
-      case "SVG":
-        // SVG export requires a different approach. Here, we'll just handle PNG and JPEG for simplicity.
-        alert("SVG format not supported in canvas export.");
+      case "BMP":
+      case "ICO":
+      case "TIFF":
+      case "JFIF":
+        alert(`${imageFormat} format not supported in canvas export.`);
         return;
       case "PNG":
       default:
@@ -103,13 +104,14 @@ const ExportGradient = () => {
           <span>px</span>
         </div>
       </div>
-      
+
       <Dropdown
         title="Select Format"
-        items={["PNG", "JPEG", "BMP", "ICO", "TIFF", "JFIF"]}
+        items={["PNG", "JPEG"]}
         clickHandler={(item) => setImageFormat(item)}
         style="w-full mt-4"
         updateWithSelectedItem={true}
+        maxHeight="6rem"
       />
 
       <ImageBtn
@@ -119,8 +121,8 @@ const ExportGradient = () => {
         imgSrc="export.svg"
         style={"w-full self-end mt-4 flex justify-center"}
       />
-
     </div>
   );
 };
+
 export default ExportGradient;

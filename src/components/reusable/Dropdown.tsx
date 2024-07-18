@@ -7,9 +7,10 @@ interface DropdownProps {
     style?: string;
     selectedItem?: string;
     updateWithSelectedItem?: boolean;
+    maxHeight?: string; // Added maxHeight parameter
 }
 
-const Dropdown = ({ title, items, clickHandler, style, updateWithSelectedItem }: DropdownProps) => {
+const Dropdown = ({ title, items, clickHandler, style, updateWithSelectedItem, maxHeight }: DropdownProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const handleItemClick = (item: string) => {
         clickHandler(item);
@@ -29,7 +30,10 @@ const Dropdown = ({ title, items, clickHandler, style, updateWithSelectedItem }:
                 <span className="text-2xl">▼</span>
             </div>
             {isOpen && (
-                <div className="absolute top-10 w-40 bg-white border rounded-md z-10">
+                <div
+                    className="absolute top-10 w-40 bg-white border rounded-md z-10 overflow-y-auto custom-scrollbar"
+                    style={{ maxHeight: maxHeight || 'auto' }} // Apply maxHeight
+                >
                     {items.map((item, index) => (
                         <div
                             key={index}
