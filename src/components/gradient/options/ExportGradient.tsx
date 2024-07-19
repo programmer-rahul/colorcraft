@@ -1,5 +1,7 @@
 import { useGradient } from "../../../context/GradientContext";
 import ImageBtn from "../../reusable/ImageBtn";
+import Dropdown from "../../reusable/Dropdown";
+import { useState } from "react";
 
 const ExportGradient = () => {
   const {
@@ -7,6 +9,8 @@ const ExportGradient = () => {
     setDownloadImageDimentions,
     gradientOptions,
   } = useGradient();
+
+  const [imageFormat, setImageFormat] = useState("PNG");
 
   const exportGradientHandler = () => {
     const canvas = document.createElement("canvas");
@@ -17,35 +21,53 @@ const ExportGradient = () => {
     canvas.width = downloadImageDimentions.width;
     canvas.height = downloadImageDimentions.height;
 
-    const newGredient = {
+    const newGradient = {
       angle: gradientOptions.angle,
       colors: [...gradientOptions.colors],
     };
 
-    const radian = (newGredient.angle * Math.PI) / 360;
+    const radian = (newGradient.angle * Math.PI) / 360;
 
     const xWidth = Math.abs(Math.cos(radian)) * canvas.width;
     const xHeight = Math.abs(Math.sin(radian)) * canvas.height;
 
-    console.log("xwidth", xWidth, xHeight);
-    console.log("radiant", radian);
-
     const gradient = ctx.createLinearGradient(0, 0, xWidth, xHeight);
 
-    gradient.addColorStop(0, newGredient.colors[0]);
-    gradient.addColorStop(1, newGredient.colors[1]);
+    gradient.addColorStop(0, newGradient.colors[0]);
+    gradient.addColorStop(1, newGradient.colors[1]);
 
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // create downloadable image of gradient
-    const image = canvas.toDataURL("image/png");
+    let image;
+    let extension;
+
+    switch (imageFormat) {
+      case "JPEG":
+        image = canvas.toDataURL("image/jpeg");
+        extension = "jpeg";
+        break;
+      case "BMP":
+      case "ICO":
+      case "TIFF":
+      case "JFIF":
+        alert(`${imageFormat} format not supported in canvas export.`);
+        return;
+      case "PNG":
+      default:
+        image = canvas.toDataURL("image/png");
+        extension = "png";
+        break;
+    }
+
     const link = document.createElement("a");
     link.href = image;
-    link.download = "colorcraft-gradient.png";
+    link.download = `colorcraft-gradient.${extension}`;
     document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
+
   return (
     <div className="flex w-full flex-col border-b-2 bg-gray-700 p-2 dark:border-slate-200 lg:w-96 xl:w-64">
       <p className="pb-2 text-center xl:text-start xl:font-semibold">
@@ -83,14 +105,24 @@ const ExportGradient = () => {
         </div>
       </div>
 
+      <Dropdown
+        title="Select Format"
+        items={["PNG", "JPEG"]}
+        clickHandler={(item) => setImageFormat(item)}
+        style="w-full mt-4"
+        updateWithSelectedItem={true}
+        maxHeight="6rem"
+      />
+
       <ImageBtn
         type="secondary"
         text="export"
         clickHandler={exportGradientHandler}
         imgSrc="export.svg"
-        style={"w-1/2 self-end mt-4 flex justify-center"}
+        style={"w-full self-end mt-4 flex justify-center"}
       />
     </div>
   );
 };
+
 export default ExportGradient;
