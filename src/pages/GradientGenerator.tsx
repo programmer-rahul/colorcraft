@@ -1,16 +1,47 @@
+import { useEffect, useRef } from "react";
 import GradientControls from "../components/gradient/GradientControls";
 import GradientPreview from "../components/gradient/GradientPreview";
 import Header from "../components/gradient/Header";
+import { useGradient } from "../context/GradientContext";
 
 const HomePage = () => {
+  const { gradientOptions } = useGradient();
+
+  const currentGradient = `${gradientOptions.style}-gradient(${
+    gradientOptions.style === "linear"
+      ? `${gradientOptions.angle}deg`
+      : "circle"
+  }, ${gradientOptions.colors[0]},${gradientOptions.colors[1]})`;
+
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  const TextStyle = {
+    // fontSize: "40px",
+    // fontWeight: "bold",
+    background: `${currentGradient}`,
+    backgroundClip: "text",
+    color: "transparent",
+  };
+
+  useEffect(() => {
+    if (textRef.current) {
+      textRef.current.style.backgroundClip = "text";
+      textRef.current.style.color = "transparent";
+    }
+  }, [currentGradient]);
+
   return (
     <main>
       <div className="flex min-h-screen flex-col bg-slate-200 dark:bg-slate-900">
         <Header />
-
         <div className="main flex-1 p-2 xl:flex xl:flex-col">
           <div className="py-2 text-center text-xl font-semibold xl:text-4xl">
-            <p className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+            <p
+              ref={textRef}
+              style={{
+                background: `${currentGradient}`,
+              }}
+            >
               Generate Css Gradient
             </p>
           </div>

@@ -45,6 +45,12 @@ export const GradientProvider = ({ children }: { children: ReactNode }) => {
       height: 1080,
     });
 
+  // const currentGradient = `${gradientOptions.style}-gradient(${
+  //   gradientOptions.style === "linear"
+  //     ? `${gradientOptions.angle}deg`
+  //     : "circle"
+  // }, ${gradientOptions.colors[0]},${gradientOptions.colors[1]})`;
+
   return (
     <GradientContext.Provider
       value={{
@@ -52,6 +58,7 @@ export const GradientProvider = ({ children }: { children: ReactNode }) => {
         setGradientOptions,
         downloadImageDimentions,
         setDownloadImageDimentions,
+        // currentGradient,
       }}
     >
       {children}
