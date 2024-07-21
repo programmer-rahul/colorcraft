@@ -52,6 +52,7 @@ export const GradientProvider = ({ children }: { children: ReactNode }) => {
         setGradientOptions,
         downloadImageDimentions,
         setDownloadImageDimentions,
+        // currentGradient,
       }}
     >
       {children}
