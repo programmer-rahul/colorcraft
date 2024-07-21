@@ -23,13 +23,6 @@ const HomePage = () => {
     color: "transparent",
   };
 
-  useEffect(() => {
-    if (textRef.current) {
-      textRef.current.style.backgroundClip = "text";
-      textRef.current.style.color = "transparent";
-    }
-  }, [currentGradient]);
-
   return (
     <main>
       <div className="flex min-h-screen flex-col bg-slate-200 dark:bg-slate-900">
