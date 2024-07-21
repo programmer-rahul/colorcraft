@@ -51,11 +51,15 @@
 
 - [React.js](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [tailwind-merge](https://github.com/dcastil/tailwind-merge)
+- [clsx](https://github.com/lukeed/clsx)
+- [class-variance-authority](https://cva.style/docs)
 - [TypeScript](https://www.typescriptlang.org/)
 - [@tippyjs/react](https://github.com/atomiks/tippyjs-react)
 - [react-hot-toast](https://react-hot-toast.com/)
 - [react-router-dom](https://reactrouter.com/)
 - [Prettier](https://prettier.io/)
+
 
 ## 💖 Show Support
 

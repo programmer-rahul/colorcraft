@@ -1,7 +1,8 @@
 import { useGradient } from "../../../context/GradientContext";
-import ImageBtn from "../../reusable/ImageBtn";
+import {Button} from "../../reusable/Button";
 import Dropdown from "../../reusable/Dropdown";
 import { useState } from "react";
+import { Export } from "@phosphor-icons/react"
 
 const ExportGradient = () => {
   const {
@@ -69,59 +70,60 @@ const ExportGradient = () => {
   };
 
   return (
-    <div className="flex w-full flex-col border-b-2 bg-gray-700 p-2 dark:border-slate-200 lg:w-96 xl:w-64">
-      <p className="pb-2 text-center xl:text-start xl:font-semibold">
-        Download Image
-      </p>
+      <div className="flex w-full flex-col border-b-2 bg-gray-700 p-2 dark:border-slate-200 lg:w-96 xl:w-64">
+          <p className="pb-2 text-center xl:text-start xl:font-semibold">
+              Download Image
+          </p>
 
-      <div className="flex w-full flex-col gap-2">
-        <div className="width flex w-full items-start gap-1">
-          <span>Width :</span>
-          <input
-            type="number"
-            className="h-6 w-2/5 rounded-md p-1 text-slate-900 outline-none"
-            value={downloadImageDimentions.width}
-            onChange={(event) => {
-              setDownloadImageDimentions((prev) => {
-                return { ...prev, width: Number(event.target.value) };
-              });
-            }}
+          <div className="flex w-full flex-col gap-2">
+              <div className="width flex w-full items-start gap-1">
+                  <span>Width :</span>
+                  <input
+                      type="number"
+                      className="h-6 w-2/5 rounded-md p-1 text-slate-900 outline-none"
+                      value={downloadImageDimentions.width}
+                      onChange={(event) => {
+                          setDownloadImageDimentions((prev) => {
+                              return { ...prev, width: Number(event.target.value) };
+                          });
+                      }}
+                  />
+                  <span>px</span>
+              </div>
+              <div className="height flex w-full items-start gap-1">
+                  <span>Height :</span>
+                  <input
+                      type="number"
+                      className="h-6 w-2/5 rounded-md p-1 text-slate-900 outline-none"
+                      value={downloadImageDimentions.height}
+                      onChange={(event) => {
+                          setDownloadImageDimentions((prev) => {
+                              return { ...prev, height: Number(event.target.value) };
+                          });
+                      }}
+                  />
+                  <span>px</span>
+              </div>
+          </div>
+
+          <Dropdown
+              title="Select Format"
+              items={["PNG", "JPEG"]}
+              clickHandler={(item) => setImageFormat(item)}
+              style="w-full mt-4"
+              updateWithSelectedItem={true}
+              maxHeight="6rem"
           />
-          <span>px</span>
-        </div>
-        <div className="height flex w-full items-start gap-1">
-          <span>Height :</span>
-          <input
-            type="number"
-            className="h-6 w-2/5 rounded-md p-1 text-slate-900 outline-none"
-            value={downloadImageDimentions.height}
-            onChange={(event) => {
-              setDownloadImageDimentions((prev) => {
-                return { ...prev, height: Number(event.target.value) };
-              });
-            }}
-          />
-          <span>px</span>
-        </div>
+          <Button
+              className="mt-8"
+              variant="secondary"
+              modifier="outline"
+              onClick={exportGradientHandler}
+          >
+              <Export size={32} weight="bold" />
+              <span>{"export"}</span>
+          </Button>
       </div>
-
-      <Dropdown
-        title="Select Format"
-        items={["PNG", "JPEG"]}
-        clickHandler={(item) => setImageFormat(item)}
-        style="w-full mt-4"
-        updateWithSelectedItem={true}
-        maxHeight="6rem"
-      />
-
-      <ImageBtn
-        type="secondary"
-        text="export"
-        clickHandler={exportGradientHandler}
-        imgSrc="export.svg"
-        style={"w-full self-end mt-4 flex justify-center"}
-      />
-    </div>
   );
 };
 
