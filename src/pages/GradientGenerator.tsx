@@ -15,13 +15,12 @@ const HomePage = () => {
 
   const textRef = useRef<HTMLParagraphElement>(null);
 
-  const TextStyle = {
-    // fontSize: "40px",
-    // fontWeight: "bold",
-    background: `${currentGradient}`,
-    backgroundClip: "text",
-    color: "transparent",
-  };
+  useEffect(() => {
+    if (textRef.current) {
+      textRef.current.style.backgroundClip = "text";
+      textRef.current.style.color = "transparent";
+    }
+  }, [currentGradient]);
 
   return (
     <main>
