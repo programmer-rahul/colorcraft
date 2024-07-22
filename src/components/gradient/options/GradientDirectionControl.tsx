@@ -1,52 +1,50 @@
 import { useGradient } from "../../../context/GradientContext";
-import { DIRECTION_ANGLES } from "../../../utils/constants";
+import { Button } from "../../reusable/Button.tsx";
+import { ArrowDown,
+         ArrowDownLeft,
+         ArrowDownRight,
+         ArrowUp,
+         ArrowUpRight,
+         ArrowUpLeft,
+         ArrowLeft,
+         ArrowRight} from "@phosphor-icons/react";
 
 const GradientDirectionControl = () => {
-  const { gradientOptions, setGradientOptions } = useGradient();
-
-  const handleDirectionChange = (
-    event: React.MouseEvent<SVGSVGElement, MouseEvent>,
-  ) => {
-    if (event.currentTarget.ariaLabel === String(gradientOptions.angle)) return;
-
-    setGradientOptions({
-      ...gradientOptions,
-      angle: Number(event.currentTarget.ariaLabel),
-    });
-  };
+    const { gradientOptions, setGradientOptions } = useGradient();
+    const dirctionIcon = [
+        {angle: 45,icon: <ArrowUpRight size={32} weight="bold" />},
+        {angle: 90,icon: <ArrowRight size={32} weight="bold" />},
+        {angle: 135,icon: <ArrowDownRight size={32} weight="bold" />},
+        {angle: 180,icon: <ArrowDown size={32} weight="bold" />},
+        {angle: 225,icon: <ArrowDownLeft size={32} weight="bold" />},
+        {angle: 270,icon: <ArrowLeft size={32} weight="bold" />},
+        {angle: 315,icon: <ArrowUpLeft size={32} weight="bold" />},
+        {angle: 360,icon: <ArrowUp size={32} weight="bold" />}];
+    
 
   return (
-    <div className="gradient-direction w-full border-b-2 bg-gray-700 p-2 dark:border-slate-200 lg:w-96 xl:w-64">
-      <p className="pb-2 text-center xl:text-start xl:font-semibold">
-        Direction
-      </p>
-      <div className="mk-cursor flex justify-around xl:flex-wrap xl:gap-x-7">
-        {DIRECTION_ANGLES.map((_, index) => {
-          return (
-            <svg
-              width={30}
-              onClick={handleDirectionChange}
-              viewBox="0 0 24 24"
-              aria-label={String(_)}
-              key={index}
-              style={{ rotate: `${_}deg` }}
-              className={`${
-                gradientOptions.angle === _ &&
-                "rounded-full border-2 border-sky-600"
-              }`}
-            >
-              <path
-                d="M12 6V18M12 18L7 13M12 18L17 13"
-                stroke="rgb(226 232 240)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          );
-        })}
+      <div className="gradient-direction w-full border-b-2 bg-gray-700 p-2 dark:border-slate-200 lg:w-96 xl:w-64">
+          <p className="pb-2 text-center xl:text-start xl:font-semibold">
+              Direction
+          </p>
+          <div className="grid grid-cols-4 gap-2">
+              {dirctionIcon.map((item, index) => {
+                  
+                  return(<Button
+                             modifier="plain"
+                             btnType="icon"
+                             active={gradientOptions.angle === item.angle}
+                             onClick={()=>{
+                                 setGradientOptions(
+                                     {...gradientOptions,
+                                      angle: Number(item.angle)
+                             })} }
+                             key={index}
+                         >{item.icon}</Button>)
+              } 
+              )}
+          </div>
       </div>
-    </div>
   );
 };
 export default GradientDirectionControl;
