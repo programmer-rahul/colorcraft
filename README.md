@@ -63,4 +63,4 @@
 
 ## 💖 Show Support
 
-Give a ⭐️ if this project helped you!
+Give a ⭐️ if you liked the project!
