@@ -3,6 +3,7 @@ import GradientDirectionControl from "./options/GradientDirectionControl";
 import GradientStyleControl from "./options/GradientStyleControl";
 import CopyCssControl from "./options/CopyCssControl";
 import GradientColorsControl from "./options/GradientColorsControl";
+import UndoRedo from "./options/UndoRedo";
 
 const GradientControls = () => {
   return (
@@ -12,7 +13,8 @@ const GradientControls = () => {
 
       {/* direction options  */}
       <GradientDirectionControl />
-
+      {/* history btn */}
+      <UndoRedo />
       {/* style  */}
       <GradientStyleControl />
 

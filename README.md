@@ -60,7 +60,6 @@
 - [react-router-dom](https://reactrouter.com/)
 - [Prettier](https://prettier.io/)
 
-
 ## 💖 Show Support
 
 Give a ⭐️ if this project helped you!
