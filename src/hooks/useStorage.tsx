@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-function useLocalStorage(key, initialValue) {
+type IlsResult<T> = [T, (value: T) => void, () => void];
+
+function useLocalStorage<T>(key: string, initialValue: T): IlsResult<T> {
   const getStoredValue = () => {
     try {
       const item = localStorage.getItem(key);
@@ -14,9 +16,9 @@ function useLocalStorage(key, initialValue) {
       return initialValue;
     }
   };
-  const [storedValue, setStoredValue] = useState(getStoredValue);
+  const [storedValue, setStoredValue] = useState<T>(getStoredValue);
 
-  const setValue = (value) => {
+  const setValue = (value: T) => {
     try {
       const valueToStore =
         value instanceof Function ? value(storedValue) : value;
@@ -52,4 +54,4 @@ function useLocalStorage(key, initialValue) {
   return [storedValue, setValue, remove];
 }
 
-export { useLocalStorage };
+export default useLocalStorage;

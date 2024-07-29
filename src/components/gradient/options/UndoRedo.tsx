@@ -1,13 +1,14 @@
 import { useGradient } from "../../../context/GradientContext";
 import { Button } from "../../reusable/Button.tsx";
 import { ArrowArcLeft, ArrowArcRight } from "@phosphor-icons/react";
-import { useHistoryStorage } from "../../../hooks/useHistoryStorage.tsx";
+import useHistoryStorage from "../../../hooks/useHistoryStorage.tsx";
 import { useEffect, useState, useRef } from "react";
+type TGradientStyle = "linear" | "radial";
 
 export default function UndoRedo() {
   const isUndoOperation = useRef(true);
   const { gradientOptions, setGradientOptions } = useGradient();
-  const [newState] = useState([
+  const [newState] = useState<[number, string[], TGradientStyle]>([
     gradientOptions.angle,
     [...gradientOptions.colors],
     gradientOptions.style,
@@ -33,13 +34,11 @@ export default function UndoRedo() {
 
   useEffect(() => {
     isUndoOperation.current = true;
-    const newOption = {
-      ...gradientOptions,
+    setGradientOptions({
       angle: state[0],
-      colors: [...state[1]],
+      colors: state[1],
       style: state[2],
-    };
-    setGradientOptions(newOption);
+    });
     //    We skip 'setGradientOptions' because it doesn't change (ESLint warning).
   }, [state]);
 
