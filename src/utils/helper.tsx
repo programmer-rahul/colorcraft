@@ -24,7 +24,7 @@ class LocalStorage {
     return null;
   }
 
-  static set(key: string, value: any) {
+  static set<T>(key: string, value: T) {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
